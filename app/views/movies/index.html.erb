@@ -1,0 +1,32 @@
+<h1>Movies</h1 >
+
+<%= form_with(scope: :movie, url: "/movies", method: 'get') do |f| %>
+  <div class="search">
+    <p>検索</p>
+    <%= f.text_field :keyword %><br>
+
+    <%= f.label :search_radio, '映画の種類:' %>
+    <%= f.radio_button :search_radio , 'all', checked: true%>
+    <%= f.label :search_radio, 'すべて' %>
+    <%= f.radio_button :search_radio, 0 %>
+    <%= f.label :search_radio, '公開予定' %>
+    <%= f.radio_button :search_radio, 1 %>
+    <%= f.label :search_radio, '公開中' %>
+
+    <%= f.submit "Search", :name => nil %><br>
+    <p>----------------------------</p>
+<% end %>
+
+
+<ul>
+  <% @movies.each do |movie| %>
+    <li>
+      <%= movie.name %>
+    </li>
+
+    <li>
+      <%= image_tag movie.image_url %>
+    </li>
+  <% end %>
+</ul>
+

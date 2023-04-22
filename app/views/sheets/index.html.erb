@@ -1,0 +1,8 @@
+<h1>Sheets</h1>
+<table>
+    <% @sheets.each do |sheet| %>
+        <%= "#{sheet.column}-#{sheet.row}" %>
+    
+        <p>---------------------------</p>
+    <% end %>
+</table> 

@@ -1,0 +1,28 @@
+<h1>new movies</h1>
+<!--エラーが出たらフラッシュメッセージを表示 -->
+<% if flash[:notice] %>
+  <%= notice %><br>
+<% end %>
+
+<div class="new_movie_form">
+  <div class="forms">
+    <%= form_with model:[:namespace, @movie], url: {action: :create} do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name %><br>
+
+      <%= f.label :year %>
+      <%= f.text_field :year %><br>
+
+      <%= f.label :description %>
+      <%= f.text_area :description, size:"30x5"%><br>
+
+      <%= f.label :is_showing%>
+      <%= f.check_box :is_showing %><br>
+
+      <%= f.label :image_url %>
+      <%= f.text_field :image_url, size:"90x5"%><br>
+
+      <%= f.submit "submit movie", class: "btn btn-primary" %><br>
+    <% end %>
+  </div>
+</div>
