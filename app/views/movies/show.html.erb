@@ -1,0 +1,57 @@
+<h1>Movie詳細</h1> 
+
+<% if flash[:notice] %>
+  <%= notice %><br>
+<% end %>
+
+<table>
+    <%= @movie.name %><br>
+    <%= @movie.year %><br>
+    <%= safe_join(@movie.description.split("\n"),tag(:br)) %><br>
+    <%= image_tag @movie.image_url %>
+
+    <% if @movie.is_showing == true %>
+      <p>公開中</p>
+    <% else %>
+      <p>公開予定</p>
+    <% end %>
+
+    <%= @movie.created_at%><br>
+    <%= @movie.updated_at %><br>
+    <p>---------------------------</p>
+
+    <h2>上映スケジュール</h2>
+    <table>
+      <% @schedules.each do |schedule| %>
+        <li>
+          <%= "#{schedule.start_time.strftime("%H:%M")}~#{schedule.end_time.strftime("%H:%M")}" %>
+        <li>
+      <% end %>
+    </table>
+
+    <p>---------------------------</p>
+ 
+    <% today = Time.now%>
+    <h2>日付選択</h2>
+    <%= form_tag("/movies/#{params[:id]}/reservation" , method: :get) do |f| %>
+      <%= select_tag 'schedule_id', options_for_select(
+        @schedules.map {|schedule| ["#{schedule.start_time.strftime("%H:%M")}~#{schedule.end_time.strftime("%H:%M")}", schedule.id]}
+      ) %>
+
+      <%= select_tag 'date', options_for_select([
+        [today.strftime('%Y年%m月%d日'), today.strftime('%Y-%m-%d')], 
+        [(today+1.day).strftime('%Y年%m月%d日'), (today+1.day).strftime('%Y-%m-%d')], 
+        [(today+2.day).strftime('%Y年%m月%d日'), (today+2.day).strftime('%Y-%m-%d')],  
+        [(today+3.day).strftime('%Y年%m月%d日'), (today+3.day).strftime('%Y-%m-%d')],  
+        [(today+4.day).strftime('%Y年%m月%d日'), (today+4.day).strftime('%Y-%m-%d')], 
+        [(today+5.day).strftime('%Y年%m月%d日'), (today+5.day).strftime('%Y-%m-%d')], 
+        [(today+6.day).strftime('%Y年%m月%d日'), (today+6.day).strftime('%Y-%m%d日')]
+      ]) %>
+
+      <%= button_tag '座席を予約する',type: 'submit', name: nil%>
+    <% end %>
+
+
+
+</table> 
+        

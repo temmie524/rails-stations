@@ -1,3 +1,56 @@
 // Place all the styles related to the Sheets controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.seat-map {
+  display: grid;
+  grid-template-columns: auto repeat(4, 1fr); /* 列の設定 */
+  grid-template-rows: auto repeat(10, 1fr); /* 行の設定 */
+  gap: 10px; /* セルの間隔 */
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
+.row-header {
+  font-weight: bold;
+}
+
+.seat-header {
+  text-align: center;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: auto repeat(4, 1fr);
+}
+
+.seat {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  text-align: center;
+  padding: 10px;
+}
+
+.seat:not(.available) {
+  background-color: #cccccc;
+}
+
+.seat.selected {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+.seat:hover {
+  cursor: pointer;
+}
+
+/* 追加CSS（お好みで調整してください） */
+table {
+  margin: auto;
+  border-collapse: collapse;
+}
+
+table td {
+  padding: 5px;
+  border: 1px solid #ccc;
+  text-align: center;
+}

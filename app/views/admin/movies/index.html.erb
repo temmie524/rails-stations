@@ -10,8 +10,7 @@
         <%= movie.name %><br>
         <%= movie.year %><br>
         <%= safe_join(movie.description.split("\n"),tag(:br)) %><br>
-        <a href= <%= movie.image_url %>>画像</a><br>
-
+        <%= image_tag movie.image_url %>
         <% if movie.is_showing == true %>
           <p>公開中</p>
         <% else %>
@@ -21,5 +20,15 @@
         <%= movie.created_at%><br>
         <%= movie.updated_at %><br>
         <p>---------------------------</p>
+
+        <% schedules = movie.schedules.order(:start_time) %>
+
+        <% schedules.each do |schedule| %>
+          <li><a href="/admin/schedules/<%= schedule.id %>">
+            <%= "#{schedule.start_time.strftime("%Y-%m-%d %H:%M")}~#{schedule.end_time.strftime("%H:%M")}" %>
+          </li></a>
+        <% end %>
+        <p>---------------------------</p>
+
     <% end %>
 </table> 

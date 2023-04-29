@@ -1,0 +1,19 @@
+<h1>スケジュール一覧</h1>
+
+<% if flash[:notice] %>
+  <%= notice %><br>
+<% end %>
+
+<ul>
+  <% @movies.each do |movie| %>
+    <% schedules = movie.schedules.order(:start_time) %>
+    <% unless schedules.empty? %>
+      <h2><%= "#{movie.id} #{movie.name}"%></h2>
+      <% schedules.each do |schedule| %>
+        <li><a href="/admin/schedules/<%= "#{schedule.id}"%>">
+          <%= "#{schedule.start_time.strftime("%Y-%m-%d %H:%M")}~#{schedule.end_time.strftime("%H:%M")}" %>
+        </a></li>
+      <% end %>
+    <% end %>
+  <% end %>
+</ul>

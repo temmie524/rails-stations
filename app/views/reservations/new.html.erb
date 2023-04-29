@@ -1,0 +1,32 @@
+<h1>予約フォーム</h1>
+
+<div class="resevation_form">
+  <div class="details">
+     <%= form_with model:[:namespace, @reservation], url: {action: :create} do |f| %>
+      <%= f.label :movie_id,"選択中の映画" %>
+      <%= f.hidden_field :movie_id, value: @selected_movie.id %>
+      <%=  @selected_movie.name %><br>
+
+      <%= f.label :date,"選択中の日時" %>
+      <%= f.hidden_field :date ,value: @selected_date %>
+      <%=  @selected_date %><br>
+
+      <%= f.label :schedule_id,"選択中の上映時間" %>
+      <%= f.hidden_field :schedule_id ,value: @selected_schedule.id %>
+      <%=  @selected_schedule.id %><br>
+
+      <%= f.label :sheet_id,"選択中の座席" %>
+      <%= f.hidden_field :sheet_id ,value: @selected_sheet.id %>
+      <%=  @selected_sheet.id %><br>
+
+      <%= f.label :name, "お名前"%>
+      <%= f.text_field :name %>
+
+      <%= f.label :email, "Email"%>
+      <%= f.text_field :email %><br>
+
+      <%= f.submit "予約する", class: "btn btn-primary", name: nil %><br>
+    <% end %>
+
+  </div>
+</div>

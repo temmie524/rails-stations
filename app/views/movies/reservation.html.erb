@@ -1,0 +1,15 @@
+<h1>Sheets</h1>
+
+<% if flash[:error] %>
+  <%= flash[:error] %><br>
+<% end %>
+
+<table>
+    <% @sheets.each do |sheet| %>
+    <a href= "/movies/<%= params[:id] %>/schedules/<%= params[:schedule_id] %>/reservations/new?sheet_id=<%= sheet.id %>&date=<%= params[:date]%>">
+        <%= "#{sheet.column}-#{sheet.row}" %>
+    </a>
+    
+    <p>---------------------------</p>
+    <% end %>
+</table> 

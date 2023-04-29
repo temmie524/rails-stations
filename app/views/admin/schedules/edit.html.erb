@@ -1,0 +1,17 @@
+<h1>edit movies</h1>
+
+<div class="edit_movie_form">
+  <div class="forms">
+    <%= form_with model: @schedules ,url: "/admin/schedules/#{ @schedule.id }", method: 'patch' do |f| %>
+      <%= f.label :start_time %>
+      <%= f.text_field :start_time %><br>
+
+      <%= f.label :end_time %>
+      <%= f.text_field :end_time %><br>
+
+      <%= f.submit "送信", class: "btn btn-primary" %><br>
+    <% end %>
+
+      <%= button_to 'delete schedule', "/admin/schedules/#{ @schedule.id }", data: { confirm: "本当によろしいですか？" }, method: :delete %>
+
+  </div>

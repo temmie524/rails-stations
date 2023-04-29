@@ -28,4 +28,20 @@
       <%= button_to 'delete movie', "/admin/movies/#{@movie.id}", data: { confirm: "本当によろしいですか？" }, method: :delete %>
 
   </div>
+
+    <% schedules = @movie.schedules.order(:start_time) %>
+    <% unless schedules.empty? %>
+      <h2><%= "#{@movie.id} #{@movie.name}の上映スケジュール"%></h2>
+      <% schedules.each do |schedule| %>
+        <li><a href="/admin/schedules/<%= schedule.id %>">
+          <%= "#{schedule.start_time.strftime("%H:%M")}~#{schedule.end_time.strftime("%H:%M")}" %>
+        </a></li>
+      <% end %>
+    <% end %>
+
+    <a href = "/admin/movies/<%= @movie.id %>/schedules/new">
+       <%= "スケジュールの新規追加" %>
+    </a></li>
+ 
+
 </div>

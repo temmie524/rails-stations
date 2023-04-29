@@ -1,8 +1,10 @@
 <h1>Sheets</h1>
 <table>
     <% @sheets.each do |sheet| %>
+    <a href= "/movies/<%= params[:id] %>/schedules/<%= params[:schedule_id] %>/reservations/new?date=<%= params[:date]%>&sheet_id=<%= sheet.id %>">
         <%= "#{sheet.column}-#{sheet.row}" %>
+    </a>
     
-        <p>---------------------------</p>
+    <p>---------------------------</p>
     <% end %>
 </table> 
