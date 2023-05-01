@@ -14,9 +14,11 @@ class MoviesController < ApplicationController
   end
 
   def reservation
-    date = params[:date]
-    schedule_id = params[:schedule_id]
-    if date.present? && schedule_id.present?
+    @date = params[:date]
+    @schedule_id = params[:schedule_id]
+
+    if @date.present? && @schedule_id.present?
+      @reserbvations = Reservation.all
       @sheets = Sheet.all
     else
       flash[:error] = "予約に失敗しました。もう一度やり直してください。"

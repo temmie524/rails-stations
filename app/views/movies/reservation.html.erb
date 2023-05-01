@@ -4,12 +4,17 @@
   <%= flash[:error] %><br>
 <% end %>
 
+<% reserv = check_reservations(@reserbvations, @date, @schedule_id) %>
+
 <table>
     <% @sheets.each do |sheet| %>
-    <a href= "/movies/<%= params[:id] %>/schedules/<%= params[:schedule_id] %>/reservations/new?sheet_id=<%= sheet.id %>&date=<%= params[:date]%>">
-        <%= "#{sheet.column}-#{sheet.row}" %>
-    </a>
-    
-    <p>---------------------------</p>
+        <% if reserv.include?(sheet.id) %>
+          <%= "#{sheet.column}-#{sheet.row}" %>
+        <% else %>
+          <a href= "/movies/<%= params[:id] %>/schedules/<%= params[:schedule_id] %>/reservations/new?sheet_id=<%= sheet.id %>&date=<%= params[:date]%>">
+          <%= "#{sheet.column}-#{sheet.row}" %>
+          </a>
+        <% end %>
+      <p>---------------------------</p>
     <% end %>
 </table> 
