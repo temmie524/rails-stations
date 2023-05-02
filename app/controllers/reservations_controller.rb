@@ -22,7 +22,7 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new(reservation_params)
 
     if @reservation.save
-      redirect_to "/movies/#{params[:movie_id]}dd"  , status: 302
+      redirect_to "/movies/#{params[:movie_id]}"  , status: 302
       flash[:notice] = "予約に成功しました"
   
     else 

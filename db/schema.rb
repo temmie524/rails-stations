@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_24_144628) do
+ActiveRecord::Schema.define(version: 2023_05_02_065217) do
 
   create_table "movies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 160, null: false, comment: "映画のタイトル。邦題・洋題は一旦考えなくてOK"
@@ -44,12 +44,41 @@ ActiveRecord::Schema.define(version: 2023_04_24_144628) do
     t.index ["movie_id"], name: "index_schedules_on_movie_id"
   end
 
+  create_table "screens", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "movie_id", null: false
+    t.bigint "schedule_id", null: false
+    t.bigint "sheet_id", null: false
+    t.integer "screen"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["movie_id"], name: "index_screens_on_movie_id"
+    t.index ["schedule_id"], name: "index_screens_on_schedule_id"
+    t.index ["sheet_id"], name: "index_screens_on_sheet_id"
+  end
+
   create_table "sheets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "column", null: false
     t.string "row", null: false
   end
 
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "name", null: false
+    t.string "password_confirmation", default: "", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
   add_foreign_key "reservations", "schedules"
   add_foreign_key "reservations", "sheets"
   add_foreign_key "schedules", "movies"
+  add_foreign_key "screens", "movies"
+  add_foreign_key "screens", "schedules"
+  add_foreign_key "screens", "sheets"
 end

@@ -1,0 +1,21 @@
+<h1>予約一覧</h1>
+
+<!--エラーが出たらフラッシュメッセージを表示 -->
+<% if flash[:notice] %>
+  <%= notice %><br>
+<% end %>
+
+<table>
+    <% @reservations.each do |reservation| %>
+        <%= "予約映画 : #{movie_search(reservation.id)}" %><br>
+        <%= "予約日時 : #{reservation.date}" %><br>
+        
+        <%= "予約上映時間ID : #{reservation.schedule_id}" %><br>
+        <%= "予約座席ID : #{reservation.sheet_id}" %><br>
+    
+        <%= "予約者Email : #{reservation.email}"%><br>
+        <%= "予約者氏名 : #{reservation.name}" %><br>
+        <p>---------------------------</p>
+
+    <% end %>
+</table> 
